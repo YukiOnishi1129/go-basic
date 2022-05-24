@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  server:
+    container_name: go-basic
+    build: ./app
+    tty: true
+    stdin_open: true
+#    depends_on:
+#      - db
+    volumes:
+      - ./app:/app
+      - /etc/localtime:/etc/localtime:ro # タイムゾーンを日本時刻に設定
+    working_dir: /app
+    ports:
+      - "4000:3000"
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - "TZ=Asia/Tokyo" # タイムゾーンを日本時刻に設定
